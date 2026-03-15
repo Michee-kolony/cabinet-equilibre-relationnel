@@ -1,0 +1,14 @@
+/* Si besoin de peaufiner le flou et les animations */
+.backdrop-blur-sm {
+  backdrop-filter: blur(5px);
+}
+
+/* Animation slide-up */
+@keyframes slideUp {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}

@@ -1,0 +1,194 @@
+<div class="bg-gradient-to-br from-[#F04DE1] to-red-500 py-32 px-6 min-h-screen flex items-center relative overflow-hidden">
+
+  <!-- TEXTURE PRINCIPALE : Motif géométrique luxueux (triangles 3D) -->
+  <div class="absolute inset-0 opacity-20 pointer-events-none"
+       style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0 L50 0 L25 50 Z\' fill=\'white\' opacity=\'0.3\'/%3E%3Cpath d=\'M50 0 L100 0 L75 50 Z\' fill=\'white\' opacity=\'0.2\'/%3E%3Cpath d=\'M0 50 L50 50 L25 100 Z\' fill=\'white\' opacity=\'0.2\'/%3E%3Cpath d=\'M50 50 L100 50 L75 100 Z\' fill=\'white\' opacity=\'0.1\'/%3E%3C/svg%3E'); background-size: 100px 100px; background-repeat: repeat; transform: rotate(15deg);">
+  </div>
+
+  <!-- TEXTURE SECONDAIRE : Lignes diagonales élégantes -->
+  <div class="absolute inset-0 opacity-10 pointer-events-none"
+       style="background: repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 2px, transparent 2px, transparent 20px);">
+  </div>
+
+  <!-- EFFET DE BRILLANCE DYNAMIQUE -->
+  <div class="absolute inset-0 opacity-30 pointer-events-none"
+       style="background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);">
+  </div>
+
+  <!-- PARTICULES LÉGÈRES (POINTS) -->
+  <div class="absolute inset-0 opacity-15 pointer-events-none"
+       style="background-image: radial-gradient(circle at 10% 20%, white 2px, transparent 2px), radial-gradient(circle at 90% 70%, white 2px, transparent 2px), radial-gradient(circle at 30% 80%, white 1px, transparent 1px), radial-gradient(circle at 70% 15%, white 1px, transparent 1px), radial-gradient(circle at 45% 45%, white 1.5px, transparent 1.5px); background-size: 200px 200px, 300px 300px, 150px 150px, 250px 250px, 180px 180px; background-repeat: repeat;">
+  </div>
+
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start relative z-10">
+
+    <!-- PARTIE GAUCHE -->
+<div class="space-y-6 text-white lg:sticky lg:top-8">
+
+  <!-- TITRE ET TEXTE -->
+  <div class="space-y-4">
+    <h2 class="text-3xl font-bold text-white drop-shadow-lg">
+      Cabinet Équilibre Relationnel
+    </h2>
+
+    <p class="text-white/90 leading-relaxed">
+      Nous accompagnons les individus et les couples pour améliorer leurs relations,
+      comprendre leurs émotions et construire des liens durables.
+    </p>
+
+    <p class="text-white/90 text-sm italic">
+      Remplissez le formulaire pour que notre équipe vous propose un accompagnement adapté.
+    </p>
+  </div>
+
+  <!-- GALERIE DE PROFILS -->
+  <div class="flex -space-x-4 mt-6">
+    <img src="https://randomuser.me/api/portraits/women/68.jpg" 
+         alt="Utilisateur 1" 
+         class="w-12 h-12 rounded-full border-2 border-white shadow-lg">
+    <img src="https://randomuser.me/api/portraits/men/45.jpg" 
+         alt="Utilisateur 2" 
+         class="w-12 h-12 rounded-full border-2 border-white shadow-lg">
+    <img src="https://randomuser.me/api/portraits/women/12.jpg" 
+         alt="Utilisateur 3" 
+         class="w-12 h-12 rounded-full border-2 border-white shadow-lg">
+    <img src="https://randomuser.me/api/portraits/men/22.jpg" 
+         alt="Utilisateur 4" 
+         class="w-12 h-12 rounded-full border-2 border-white shadow-lg">
+    <img src="https://randomuser.me/api/portraits/women/30.jpg" 
+         alt="Utilisateur 5" 
+         class="w-12 h-12 rounded-full border-2 border-white shadow-lg">
+  </div>
+
+</div>
+
+    <!-- FORMULAIRE -->
+    <div class="bg-white shadow-2xl rounded-3xl p-8 backdrop-blur-sm bg-white/95">
+
+      <h4 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-3 text-center">
+        Formulaire de consultation
+      </h4>
+
+      <form class="space-y-6">
+
+        <!-- IDENTITÉ -->
+        <div>
+          <h4 class="font-semibold text-gray-700 mb-4 text-base">1. Identité</h4>
+
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <input type="text" placeholder="Nom et prénom"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+
+            <input type="number" placeholder="Âge"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+
+            <input type="text" placeholder="Ville de résidence"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+
+            <input type="text" placeholder="Téléphone / WhatsApp"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+
+            <input type="text" placeholder="Taille"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+
+            <input type="text" placeholder="Couleur de peau"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+
+            <input type="text" placeholder="Couleur des yeux"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+
+          </div>
+        </div>
+
+        <!-- SITUATION -->
+        <div>
+          <h4 class="font-semibold text-gray-700 mb-3 text-base">
+            2. Situation relationnelle
+          </h4>
+
+          <select
+            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent">
+
+            <option>Choisissez votre situation</option>
+            <option>Célibataire (à la recherche d’une relation)</option>
+            <option>En couple</option>
+            <option>Marié(e)</option>
+            <option>Séparé(e) / difficulté relationnelle</option>
+
+          </select>
+        </div>
+
+        <!-- PREOCCUPATION / ATTENTE -->
+        <div class="grid md:grid-cols-2 gap-4">
+
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3 text-base">
+              3. Préoccupation
+            </h4>
+
+            <textarea rows="3" placeholder="Expliquez votre difficulté..."
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2 text-sm focus:border-[#F04DE1] outline-none bg-transparent resize-none"></textarea>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3 text-base">
+              4. Attente
+            </h4>
+
+            <textarea rows="3" placeholder="Quelle aide souhaitez-vous ?"
+              class="w-full border-0 border-b-2 border-gray-200 px-2 py-2 text-sm focus:border-[#F04DE1] outline-none bg-transparent resize-none"></textarea>
+          </div>
+
+        </div>
+
+        <!-- DISPONIBILITÉ -->
+        <div class="grid md:grid-cols-2 gap-6 items-end">
+
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3 text-base">
+              5. Disponibilité
+            </h4>
+
+            <div class="flex flex-col gap-2 text-sm text-gray-600">
+
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="radio" name="consultation"
+                  class="w-4 h-4 text-[#F04DE1] focus:ring-[#F04DE1]">
+                <span class="group-hover:text-[#F04DE1] transition-colors">
+                  En présentiel
+                </span>
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="radio" name="consultation"
+                  class="w-4 h-4 text-[#F04DE1] focus:ring-[#F04DE1]">
+                <span class="group-hover:text-[#F04DE1] transition-colors">
+                  En ligne
+                </span>
+              </label>
+
+            </div>
+          </div>
+
+        </div>
+          <!-- BOUTON -->
+          <button
+            class="w-full bg-gradient-to-r from-[#F04DE1] to-red-500 hover:from-[#d43db9] hover:to-red-600 text-white py-3 rounded-xl font-semibold text-sm transition-all transform hover:scale-[1.02] shadow-lg">
+
+            Envoyer la demande
+
+          </button>
+
+      </form>
+
+      <!-- TEXTE CONFIDENTIALITÉ -->
+      <p class="text-xs text-gray-400 text-center mt-6">
+        * Vos informations sont strictement confidentielles
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

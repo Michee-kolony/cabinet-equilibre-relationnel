@@ -1,0 +1,37 @@
+/* liens menu */
+.nav-link{
+  @apply relative hover:text-green-600 transition duration-300;
+}
+
+.nav-link::after{
+  content:'';
+  @apply absolute left-0 bottom-[-5px] w-0 h-[2px] bg-green-600 transition-all duration-300;
+}
+
+.nav-link:hover::after{
+  width:100%;
+}
+
+
+/* hamburger */
+
+.hamburger{
+  @apply w-6 h-[2px] bg-gray-800 transition-all duration-300;
+}
+
+
+/* mobile menu */
+
+.mobile-menu{
+  @apply md:hidden bg-white shadow-md flex flex-col items-center gap-6 overflow-hidden;
+  max-height:0;
+  transition: max-height 0.4s ease;
+}
+
+.mobile-menu a{
+  @apply text-gray-700 font-medium hover:text-green-600 transition py-2;
+}
+
+.mobile-menu.open{
+  max-height:300px;
+}

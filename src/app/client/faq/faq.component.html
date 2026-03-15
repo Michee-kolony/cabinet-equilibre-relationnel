@@ -1,0 +1,27 @@
+<div class="max-w-4xl mx-auto py-12 px-4">
+  <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">FAQ - Équilibre Relationnel</h2>
+  
+  <div *ngFor="let faq of faqs; let i = index" class="mb-4 border rounded-lg overflow-hidden">
+    <!-- Question -->
+    <button
+      (click)="toggle(i)"
+      class="w-full flex justify-between items-center p-4 bg-white transition"
+    >
+      <span class="font-medium text-gray-800">{{ faq.question }}</span>
+      <span class="text-2xl text-gray-600 transition-transform duration-300"
+            [ngClass]="{'rotate-45': faq.open}">
+        +
+      </span>
+    </button>
+
+    <!-- Réponse avec animation -->
+    <div
+      class="overflow-hidden transition-all duration-500"
+      [style.maxHeight]="faq.open ? '500px' : '0px'"
+    >
+      <p class="p-4 text-gray-700 bg-white">
+        {{ faq.answer }}
+      </p>
+    </div>
+  </div>
+</div>

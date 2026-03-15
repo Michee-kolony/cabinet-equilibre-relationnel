@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+
+
+<!-- Ajoute le composant de consentement -->
+<app-cookie-consent></app-cookie-consent>
+
+<div *ngIf="loading" class="fixed bg-white/60 top-0 left-0 bottom-0 right-0 z-50 flex justify-center items-center">
+   <div>
+    <div class="spinner-border text-[#F04DE1]" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+   </div>
+</div>
+
+
+<!-- Bouton retour en haut - modifié avec condition *ngIf -->
+<button 
+  *ngIf="showScrollButton"
+  (click)="scrollToTop()"
+  class="fixed bottom-6 right-6 bg-[#F04DE1] hover:bg-[#F04DE1]/50 text-white w-14 h-14 rounded-full shadow-md transition-all duration-300 hover:shadow-lg flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-green-300 z-50" 
+  aria-label="Retour en haut">
+  <i class="fa-solid fa-chevron-up text-xl"></i>
+</button>

@@ -1,0 +1,4 @@
+/* Rotation fluide de l'icône + en - */
+.rotate-45 {
+  transform: rotate(45deg);
+}
