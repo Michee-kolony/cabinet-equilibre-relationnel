@@ -1,0 +1,99 @@
+<div class="flex h-screen">
+  <!-- Sidebar Desktop -->
+  <div
+    [class.w-64]="isSidebarOpen"
+    [class.w-16]="!isSidebarOpen"
+    class="bg-gradient-to-br from-[#F04DE1] to-red-500 text-white flex flex-col transition-all duration-300 hidden md:flex"
+  >
+    <!-- Toggle Button -->
+    <button
+      (click)="toggleSidebar()"
+      class="p-4 focus:outline-none self-end"
+      title="Toggle Sidebar"
+    >
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+
+    <!-- Menu Items -->
+    <nav class="flex-1 mt-4">
+      <a routerLink="/admin/dashboard" class="flex text-white text-decoration-none items-center p-4 hover:bg-white/20 transition rounded">
+        <i class="fas fa-home w-6"></i>
+        <span *ngIf="isSidebarOpen" class="ml-3">Tableau de bord</span>
+      </a>
+
+      <a routerLink="/admin/demandes" class="flex text-white text-decoration-none items-center p-4 hover:bg-white/20 transition rounded">
+        <i class="fas fa-envelope w-6"></i>
+        <span *ngIf="isSidebarOpen" class="ml-3">Reception demandes</span>
+      </a>
+
+      <a routerLink="/admin/messages" class="flex text-white text-decoration-none items-center p-4 hover:bg-white/20 transition rounded">
+        <i class="fas fa-comments w-6"></i>
+        <span *ngIf="isSidebarOpen" class="ml-3">Messages</span>
+      </a>
+       <a routerLink="/admin/traitement" class="flex text-white text-decoration-none items-center p-4 hover:bg-white/20 transition rounded">
+      <i class="fa-solid fa-align-right w-6"></i>
+        <span *ngIf="isSidebarOpen" class="ml-3">Demandes traitées</span>
+      </a>
+    </nav>
+
+    <!-- Profile + Logout -->
+    <div class="mt-auto p-4 flex flex-col items-center">
+      <div
+        class="bg-white text-[#F04DE1] font-bold rounded-full w-12 h-12 flex items-center justify-center text-lg mb-2"
+      >
+        <span>{{ adminInitials }}</span>
+      </div>
+
+      <span *ngIf="isSidebarOpen" class="mb-2">{{ adminName }}</span>
+
+      <button
+        (click)="logout()"
+        class="flex items-center bg-white text-[#F04DE1] px-3 py-1 rounded hover:bg-white/80 transition"
+      >
+        <i class="fas fa-sign-out-alt mr-2"></i>
+        <span *ngIf="isSidebarOpen">Logout</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Content + Mobile Bottom Menu -->
+  <div class="flex-1 flex flex-col relative">
+
+    <!-- Mobile Bottom Tabs -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-br from-[#F04DE1] to-red-500 text-white flex justify-around p-2 md:hidden"
+    >
+      <a routerLink="/admin/dashboard" class="flex text-decoration-none text-white flex-col items-center text-xs">
+        <i class="fas fa-tachometer-alt text-lg"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/admin/demandes" class="flex text-decoration-none text-white flex-col items-center text-xs">
+        <i class="fas fa-envelope text-lg"></i>
+        <span>Demandes</span>
+      </a>
+
+      <a  routerLink="/admin/messages" class="flex text-decoration-none text-white flex-col items-center text-xs">
+        <i class="fas fa-comments text-lg"></i>
+        <span>Messages</span>
+      </a>
+
+        <a  routerLink="/admin/traitement" class="flex text-decoration-none text-white flex-col items-center text-xs">
+      <i class="fa-solid fa-align-right text-lg"></i>
+        <span>Demandes traitées</span>
+      </a>
+
+
+      <a (click)="logout()" class="flex flex-col items-center text-xs text-white text-decoration-none">
+        <i class="fas fa-sign-out-alt text-lg"></i>
+        <span>Logout</span>
+      </a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex-1 w-full overflow-auto p-6 pb-20">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

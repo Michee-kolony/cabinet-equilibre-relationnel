@@ -5,6 +5,11 @@ import { AccueilComponent } from './client/accueil/accueil.component';
 import { DemandeComponent } from './client/demande/demande.component';
 import { AboutComponent } from './client/about/about.component';
 import { LoginComponent } from './admin/login/login.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { DemandesComponent } from './admin/demandes/demandes.component';
+import { MessagesComponent } from './admin/messages/messages.component';
+import { TraitementComponent } from './admin/traitement/traitement.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -16,7 +21,16 @@ const routes: Routes = [
        {path:'a-propos', component: AboutComponent},
     ]
   },
-  {path:'login', component: LoginComponent}
+  {path:'login', component: LoginComponent},
+  {path:'admin', component: AdminComponent, 
+    children:[
+      {path:'', redirectTo:'dashboard', pathMatch:'full'},
+      {path:'dashboard', component: DashboardComponent},
+      {path:'demandes', component: DemandesComponent},
+      {path:'messages', component: MessagesComponent},
+      {path:'traitement', component: TraitementComponent}
+    ]
+  }
 ];
 
 @NgModule({

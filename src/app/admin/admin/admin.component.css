@@ -1,0 +1,20 @@
+/* Smooth hover effect for links */
+a:hover {
+  cursor: pointer;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+/* For md breakpoint and up, sidebar transition */
+@media (min-width: 768px) {
+  .transition {
+    transition: all 0.3s ease;
+  }
+}

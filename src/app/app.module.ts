@@ -12,6 +12,12 @@ import { AboutComponent } from './client/about/about.component';
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 import { FaqComponent } from './client/faq/faq.component';
 import { LoginComponent } from './admin/login/login.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { DemandesComponent } from './admin/demandes/demandes.component';
+import { MessagesComponent } from './admin/messages/messages.component';
+import {FormsModule} from '@angular/forms';
+import { TraitementComponent } from './admin/traitement/traitement.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +30,17 @@ import { LoginComponent } from './admin/login/login.component';
     AboutComponent,
     CookieConsentComponent,
     FaqComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent,
+    DashboardComponent,
+    DemandesComponent,
+    MessagesComponent,
+    TraitementComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
