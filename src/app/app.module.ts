@@ -11,6 +11,7 @@ import { DemandeComponent } from './client/demande/demande.component';
 import { AboutComponent } from './client/about/about.component';
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 import { FaqComponent } from './client/faq/faq.component';
+import { LoginComponent } from './admin/login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FaqComponent } from './client/faq/faq.component';
     DemandeComponent,
     AboutComponent,
     CookieConsentComponent,
-    FaqComponent
+    FaqComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

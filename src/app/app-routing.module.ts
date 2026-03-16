@@ -4,6 +4,7 @@ import { EquilibreComponent } from './client/equilibre/equilibre.component';
 import { AccueilComponent } from './client/accueil/accueil.component';
 import { DemandeComponent } from './client/demande/demande.component';
 import { AboutComponent } from './client/about/about.component';
+import { LoginComponent } from './admin/login/login.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
        {path:'faire-une-demande', component: DemandeComponent},
        {path:'a-propos', component: AboutComponent},
     ]
-  }
+  },
+  {path:'login', component: LoginComponent}
 ];
 
 @NgModule({
