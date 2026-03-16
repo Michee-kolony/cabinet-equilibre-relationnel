@@ -13,102 +13,51 @@
   </div>
 
   <!-- Colonne gauche (formulaire) -->
-  <div class="relative z-10 w-full md:w-2/4 bg-white/80 backdrop-blur-sm flex items-center justify-center p-8 shadow-2xl">
-    <div class="w-full max-w-md">
-      <!-- Logo avec animation -->
-      <div class="relative mb-8">
-        <div class="absolute inset-0 bg-gradient-to-r from-[#F04DE1] to-red-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
-        <img src="images/WhatsApp Image 2026-02-26 at 15.24.01-Photoroom.png" class="w-[180px] mx-auto relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-300"/>
+    <!-- Colonne gauche (plus petite) -->
+  <div class="w-full md:w-2/4 bg-white flex items-center justify-center p-10">
+
+    <div class="w-full max-w-sm">
+      <img src="images/WhatsApp Image 2026-02-26 at 15.24.01-Photoroom.png" class="w-[150px] mx-auto"/>
+      <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+        Administrateur
+      </h2>
+
+      <!-- Username -->
+      <div class="mb-4">
+        <label class="block text-gray-600 mb-2">Nom d'utilisateur</label>
+        <input
+          type="text"
+          placeholder="Entrer votre nom"
+          class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
 
-      <!-- Titre avec effet -->
-      <div class="text-center mb-10">
-        <h2 class="text-4xl font-bold bg-gradient-to-r from-[#F04DE1] to-red-500 bg-clip-text text-transparent mb-2">
-          Administrateur
-        </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-[#F04DE1] to-red-500 mx-auto rounded-full"></div>
+      <!-- Password -->
+      <div class="mb-6 relative">
+        <label class="block text-gray-600 mb-2">Mot de passe</label>
+
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Entrer votre mot de passe"
+          class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <i
+          (click)="togglePassword()"
+          class="fa absolute right-4 top-11 cursor-pointer text-gray-500"
+          [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+        ></i>
       </div>
 
-      <!-- Formulaire avec design amélioré -->
-      <div class="space-y-6">
-        <!-- Username -->
-        <div class="group">
-          <label class="block text-gray-700 text-sm font-semibold mb-2 ml-1">
-            <i class="fa fa-user text-[#F04DE1] mr-2"></i>Nom d'utilisateur
-          </label>
-          <div class="relative">
-            <input
-              type="text"
-              placeholder="exemple@email.com"
-              class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:border-[#F04DE1] focus:ring-4 focus:ring-[#F04DE1]/20 transition-all duration-300 outline-none bg-white/50 backdrop-blur-sm"
-            />
-            <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-[#F04DE1] to-red-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"></div>
-          </div>
-        </div>
+      <!-- Button -->
+      <button
+        class="w-full bg-[#F04DE1] text-white py-3 rounded-lg hover:bg-[#d633a6]/50 transition"
+      >
+        Se connecter
+      </button>
 
-        <!-- Password avec amélioration -->
-        <div class="group relative">
-          <label class="block text-gray-700 text-sm font-semibold mb-2 ml-1">
-            <i class="fa fa-lock text-[#F04DE1] mr-2"></i>Mot de passe
-          </label>
-          <div class="relative">
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              placeholder="••••••••"
-              class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:border-[#F04DE1] focus:ring-4 focus:ring-[#F04DE1]/20 transition-all duration-300 outline-none pr-12 bg-white/50 backdrop-blur-sm"
-            />
-            <button
-              type="button"
-              (click)="togglePassword()"
-              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <i
-                class="fa text-gray-500 text-lg"
-                [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
-              ></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Options supplémentaires -->
-        <div class="flex items-center justify-between text-sm">
-          <label class="flex items-center space-x-2 cursor-pointer">
-            <input type="checkbox" class="w-4 h-4 accent-[#F04DE1] rounded border-gray-300"/>
-            <span class="text-gray-600">Se souvenir de moi</span>
-          </label>
-          <a href="#" class="text-[#F04DE1] hover:text-red-500 font-medium transition-colors">
-            Mot de passe oublié?
-          </a>
-        </div>
-
-        <!-- Bouton de connexion amélioré -->
-        <button
-          class="relative w-full bg-gradient-to-r from-[#F04DE1] to-red-500 text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-[#F04DE1]/30 hover:shadow-xl hover:shadow-[#F04DE1]/40 transform hover:-translate-y-0.5 transition-all duration-300 overflow-hidden group"
-        >
-          <span class="relative z-10 flex items-center justify-center">
-            <i class="fa fa-sign-in-alt mr-2"></i>
-            Se connecter
-          </span>
-          <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-[#F04DE1] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </button>
-
-        <!-- Séparateur élégant -->
-        <div class="relative my-8">
-          <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-gray-200"></div>
-          </div>
-          <div class="relative flex justify-center text-sm">
-            <span class="px-4 bg-white/80 text-gray-500">Accès sécurisé</span>
-          </div>
-        </div>
-
-        <!-- Info supplémentaire -->
-        <p class="text-center text-gray-500 text-sm">
-          <i class="fa fa-shield-alt text-[#F04DE1] mr-1"></i>
-          Connexion réservée aux administrateurs
-        </p>
-      </div>
     </div>
+
   </div>
 
   <!-- Colonne droite améliorée -->
