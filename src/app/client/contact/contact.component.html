@@ -1,0 +1,88 @@
+<div class="bg-gradient-to-br from-[#F04DE1] to-red-500 py-32 px-6 min-h-screen flex items-center relative overflow-hidden">
+
+  <!-- TEXTURE PRINCIPALE -->
+  <div class="absolute inset-0 opacity-20 pointer-events-none"
+       style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0 L50 0 L25 50 Z\' fill=\'white\' opacity=\'0.3\'/%3E%3Cpath d=\'M50 0 L100 0 L75 50 Z\' fill=\'white\' opacity=\'0.2\'/%3E%3Cpath d=\'M0 50 L50 50 L25 100 Z\' fill=\'white\' opacity=\'0.2\'/%3E%3Cpath d=\'M50 50 L100 50 L75 100 Z\' fill=\'white\' opacity=\'0.1\'/%3E%3C/svg%3E'); background-size: 100px 100px; background-repeat: repeat; transform: rotate(15deg);">
+  </div>
+
+  <!-- TEXTURE SECONDAIRE -->
+  <div class="absolute inset-0 opacity-10 pointer-events-none"
+       style="background: repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 2px, transparent 2px, transparent 20px);">
+  </div>
+
+  <!-- EFFET DE BRILLANCE -->
+  <div class="absolute inset-0 opacity-30 pointer-events-none"
+       style="background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);">
+  </div>
+
+  <!-- PARTICULES -->
+  <div class="absolute inset-0 opacity-15 pointer-events-none"
+       style="background-image: radial-gradient(circle at 10% 20%, white 2px, transparent 2px), radial-gradient(circle at 90% 70%, white 2px, transparent 2px), radial-gradient(circle at 30% 80%, white 1px, transparent 1px), radial-gradient(circle at 70% 15%, white 1px, transparent 1px), radial-gradient(circle at 45% 45%, white 1.5px, transparent 1.5px); background-size: 200px 200px, 300px 300px, 150px 150px, 250px 250px, 180px 180px; background-repeat: repeat;">
+  </div>
+
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start relative z-10">
+
+    <!-- PARTIE GAUCHE -->
+    <div class="space-y-6 text-white lg:sticky lg:top-8">
+      <div class="space-y-4">
+        <h2 class="text-3xl font-bold text-white drop-shadow-lg">
+          Contactez-nous
+        </h2>
+
+        <p class="text-white/90 leading-relaxed">
+          Avez-vous une question ou une préoccupation ? Veuillez nous contacter.
+          Notre équipe s'en chargera pour vous répondre rapidement.
+        </p>
+      </div>
+    </div>
+
+    <!-- FORMULAIRE -->
+    <div class="bg-white shadow-2xl rounded-3xl p-8 backdrop-blur-sm bg-white/95">
+
+      <h4 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-3 text-center">
+        Formulaire de contact
+      </h4>
+
+      <form class="space-y-6">
+
+        <!-- NOM -->
+        <div>
+          <input type="text" placeholder="Nom"
+            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+        </div>
+
+        <!-- EMAIL -->
+        <div>
+          <input type="email" placeholder="Email"
+            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+        </div>
+
+        <!-- TELEPHONE -->
+        <div>
+          <input type="text" placeholder="Téléphone"
+            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
+        </div>
+
+        <!-- MESSAGE -->
+        <div>
+          <textarea rows="4" placeholder="Votre message"
+            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2 text-sm focus:border-[#F04DE1] outline-none bg-transparent resize-none"></textarea>
+        </div>
+
+        <!-- BOUTON -->
+        <button
+          class="w-full bg-gradient-to-r from-[#F04DE1] to-red-500 hover:from-[#d43db9] hover:to-red-600 text-white py-3 rounded-xl font-semibold text-sm transition-all transform hover:scale-[1.02] shadow-lg">
+          Envoyer
+        </button>
+
+      </form>
+
+      <p class="text-xs text-gray-400 text-center mt-6">
+        * Vos informations sont strictement confidentielles
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

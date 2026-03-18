@@ -18,6 +18,7 @@ import { DemandesComponent } from './admin/demandes/demandes.component';
 import { MessagesComponent } from './admin/messages/messages.component';
 import {FormsModule} from '@angular/forms';
 import { TraitementComponent } from './admin/traitement/traitement.component';
+import { ContactComponent } from './client/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TraitementComponent } from './admin/traitement/traitement.component';
     DashboardComponent,
     DemandesComponent,
     MessagesComponent,
-    TraitementComponent
+    TraitementComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
