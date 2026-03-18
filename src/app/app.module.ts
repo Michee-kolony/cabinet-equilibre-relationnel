@@ -19,6 +19,7 @@ import { MessagesComponent } from './admin/messages/messages.component';
 import {FormsModule} from '@angular/forms';
 import { TraitementComponent } from './admin/traitement/traitement.component';
 import { ContactComponent } from './client/contact/contact.component';
+import { HttpClientModule } from '@angular/common/http'; // <-- Import important !
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ContactComponent } from './client/contact/contact.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
