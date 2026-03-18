@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  url = "http://api-equilibre.cloud/admin/login";
+  url = "https://api-equilibre.cloud/admin/login";
   showPassword = false;
   loading = false;           // Pour le spinner
   popupMessage: string = ''; // Message à afficher dans le popup
