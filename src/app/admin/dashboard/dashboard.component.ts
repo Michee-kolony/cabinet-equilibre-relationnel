@@ -1,6 +1,7 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
+import { interval, Subscription } from 'rxjs';
 
 Chart.register(...registerables);
 
@@ -9,7 +10,7 @@ Chart.register(...registerables);
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit, OnDestroy {
 
   url = "https://api-equilibre.cloud/demande";
   loading: boolean = true;
@@ -17,24 +18,48 @@ export class DashboardComponent implements AfterViewInit {
   demandes: any[] = [];
   totalDemandes: number = 0;
 
+  genderChart: any;
+
+  private refreshSubscription!: Subscription;
+
   constructor(private http: HttpClient) { }
 
   ngAfterViewInit(): void {
     this.loadDemandes();
+
+    // Rafraîchissement automatique toutes les 10 secondes
+    this.refreshSubscription = interval(10000).subscribe(() => {
+      this.loadDemandes(false); // false pour ne pas afficher loader
+    });
   }
 
-  loadDemandes() {
-    this.http.get<any[]>(this.url).subscribe(data => {
-      this.demandes = data;
-      this.totalDemandes = data.length;
-      this.loading = false;
+  ngOnDestroy(): void {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+  }
+loadDemandes(showLoading: boolean = true) {
+  if (showLoading) this.loading = true;
 
-      // Calcul nombre par sexe pour le graphique
-      const filles = data.filter(d => d.sexe.toLowerCase() === 'féminin').length;
-      const garcons = data.filter(d => d.sexe.toLowerCase() === 'masculin').length;
+  this.http.get<any[]>(this.url).subscribe(data => {
+    // Trier les demandes du plus récent au plus ancien
+    this.demandes = data.sort((a, b) => 
+      new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
+    );
 
-      // Initialisation du graphique après récupération
-      new Chart("genderChart", {
+    this.totalDemandes = this.demandes.length;
+    if (showLoading) this.loading = false;
+
+    // Calcul nombre par sexe pour le graphique
+    const filles = this.demandes.filter(d => d.sexe.toLowerCase() === 'féminin').length;
+    const garcons = this.demandes.filter(d => d.sexe.toLowerCase() === 'masculin').length;
+
+    // Mise à jour du graphique
+    if (this.genderChart) {
+      this.genderChart.data.datasets[0].data = [filles, garcons];
+      this.genderChart.update();
+    } else {
+      this.genderChart = new Chart("genderChart", {
         type: 'doughnut',
         data: {
           labels: ['Femmes', 'Hommes'],
@@ -63,11 +88,13 @@ export class DashboardComponent implements AfterViewInit {
           }
         }
       });
+    }
 
-    }, error => {
-      console.error("Erreur lors de la récupération des demandes :", error);
-    });
-  }
+  }, error => {
+    console.error("Erreur lors de la récupération des demandes :", error);
+    if (showLoading) this.loading = false;
+  });
+}
 
   // Fonction pour récupérer les initiales du nom
   getInitials(name: string) {
@@ -75,4 +102,36 @@ export class DashboardComponent implements AfterViewInit {
     const parts = name.split(' ');
     return parts.map(p => p[0]).join('').toUpperCase();
   }
+
+  getTimeAgo(dateString: string): string {
+  const now = new Date();
+  const past = new Date(dateString);
+  const diffSeconds = Math.floor((now.getTime() - past.getTime()) / 1000);
+
+  if (diffSeconds < 60) return "À l'instant";
+  if (diffSeconds < 3600) {
+    const minutes = Math.floor(diffSeconds / 60);
+    return minutes === 1 ? "il y a 1 min" : `il y a ${minutes} min`;
+  }
+  if (diffSeconds < 86400) {
+    const hours = Math.floor(diffSeconds / 3600);
+    return hours === 1 ? "il y a 1 h" : `il y a ${hours} h`;
+  }
+  if (diffSeconds < 604800) {
+    const days = Math.floor(diffSeconds / 86400);
+    return days === 1 ? "il y a 1 jour" : `il y a ${days} jours`;
+  }
+  if (diffSeconds < 2592000) {
+    const weeks = Math.floor(diffSeconds / 604800);
+    return weeks === 1 ? "il y a 1 semaine" : `il y a ${weeks} semaines`;
+  }
+  if (diffSeconds < 31536000) {
+    const months = Math.floor(diffSeconds / 2592000);
+    return months === 1 ? "il y a 1 mois" : `il y a ${months} mois`;
+  } else {
+    const years = Math.floor(diffSeconds / 31536000);
+    return years === 1 ? "il y a 1 an" : `il y a ${years} ans`;
+  }
+}
+
 }

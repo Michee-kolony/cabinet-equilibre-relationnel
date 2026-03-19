@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { interval, Subscription } from 'rxjs';
 
 interface Demande {
   _id: string;
@@ -17,7 +18,7 @@ interface Demande {
   templateUrl: './demandes.component.html',
   styleUrls: ['./demandes.component.css']
 })
-export class DemandesComponent implements OnInit {
+export class DemandesComponent implements OnInit, OnDestroy {
 
   url = "https://api-equilibre.cloud/demande";
 
@@ -25,31 +26,48 @@ export class DemandesComponent implements OnInit {
   demandesFiltrees: Demande[] = [];
   loading: boolean = true;
 
-  // Civilités fixes
   civilites: string[] = ['Célibataire', 'En couple', 'Marié(e)', 'Séparé(e)'];
 
   recherche: string = '';
   filtreSexe: string = '';
   filtreEtatCivil: string = '';
 
+  private refreshSubscription!: Subscription;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getDemandes();
+
+    // Rafraîchissement automatique toutes les 10 secondes
+    this.refreshSubscription = interval(10000).subscribe(() => {
+      this.getDemandes(false); // false pour ne pas montrer le loading overlay
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
   }
 
   // Récupérer les demandes depuis le backend
-  getDemandes() {
+  getDemandes(showLoading: boolean = true) {
+    if (showLoading) this.loading = true;
+
     this.http.get<Demande[]>(this.url).subscribe({
       next: (data) => {
         // Trier du plus récent au plus ancien
         this.demandes = data.sort((a, b) =>
           new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
         );
-        this.demandesFiltrees = [...this.demandes];
-        this.loading = false;
+        this.filtrerDemandes(); // Mettre à jour le filtre automatiquement
+        if (showLoading) this.loading = false;
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err);
+        if (showLoading) this.loading = false;
+      }
     });
   }
 
@@ -92,7 +110,7 @@ export class DemandesComponent implements OnInit {
     switch(statut.toLowerCase()) {
       case 'en attente': return 'bg-orange-100 text-orange-800';
       case 'en cours': return 'bg-yellow-100 text-yellow-800';
-      case 'traite': return 'bg-green-100 text-green-800';
+      case 'traitée': return 'bg-green-100 text-green-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   }

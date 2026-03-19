@@ -79,7 +79,7 @@
             </div>
             <span>Demande reçue de <b>{{ demande.nom }}</b></span>
           </div>
-          <span class="text-sm text-gray-400">{{ demande.createAt | date:'shortTime' }}</span>
+          <span class="text-sm text-gray-400">{{ getTimeAgo(demande.createAt) }}</span>
         </li>
 
       </ul>
