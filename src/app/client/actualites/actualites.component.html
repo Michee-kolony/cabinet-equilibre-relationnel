@@ -1,0 +1,65 @@
+<div class="p-6 min-h-screen py-32 container">
+
+  <!-- BARRE DE RECHERCHE -->
+  <div class="flex justify-center mb-8">
+    <div class="relative w-full max-w-md">
+      <input
+        type="text"
+        placeholder="Rechercher une actualité..."
+        class="w-full pl-12 pr-4 py-3 rounded-full border-2 border-[#F04DE1] focus:outline-none focus:ring-2 focus:ring-[#F04DE1] shadow-sm"
+      />
+      <i class="fa-solid fa-search absolute left-4 top-5 text-gray-400">
+        
+      </i>
+    </div>
+  </div>
+
+  <!-- TITRE -->
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">
+    Actualités récentes
+  </h1>
+
+  <!-- LISTE DES ACTUALITÉS -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- CARD -->
+    <div *ngFor="let article of articles"
+         class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+
+      <!-- IMAGE -->
+      <div class="h-48 w-full overflow-hidden">
+        <img [src]="article.image"
+             alt="image"
+             class="w-full h-full object-cover hover:scale-105 transition duration-300">
+      </div>
+
+      <!-- CONTENU -->
+      <div class="p-5 flex flex-col flex-1">
+
+        <!-- DATE -->
+        <span class="text-xs text-gray-400 mb-2">
+          {{ article.date }}
+        </span>
+
+        <!-- TITRE -->
+        <h2 class="text-lg font-bold text-gray-800 mb-2 line-clamp-2">
+          {{ article.titre }}
+        </h2>
+
+        <!-- SOUS-TITRE -->
+        <p class="text-sm text-gray-600 mb-4 line-clamp-3">
+          {{ article.sousTitre }}
+        </p>
+
+        <!-- BUTTON -->
+        <button
+          class="mt-auto bg-gradient-to-r from-[#F04DE1] to-pink-500 text-white py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition">
+          Lire plus
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

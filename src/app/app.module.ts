@@ -20,7 +20,8 @@ import {FormsModule} from '@angular/forms';
 import { TraitementComponent } from './admin/traitement/traitement.component';
 import { ContactComponent } from './client/contact/contact.component';
 import { HttpClientModule } from '@angular/common/http';
-import { InfoComponent } from './admin/info/info.component'; // <-- Import important !
+import { InfoComponent } from './admin/info/info.component';
+import { ActualitesComponent } from './client/actualites/actualites.component'; // <-- Import important !
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { InfoComponent } from './admin/info/info.component'; // <-- Import impor
     MessagesComponent,
     TraitementComponent,
     ContactComponent,
-    InfoComponent
+    InfoComponent,
+    ActualitesComponent
   ],
   imports: [
     BrowserModule,

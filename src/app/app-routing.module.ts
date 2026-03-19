@@ -12,6 +12,7 @@ import { MessagesComponent } from './admin/messages/messages.component';
 import { TraitementComponent } from './admin/traitement/traitement.component';
 import { ContactComponent } from './client/contact/contact.component';
 import { InfoComponent } from './admin/info/info.component';
+import { ActualitesComponent } from './client/actualites/actualites.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -21,7 +22,8 @@ const routes: Routes = [
        {path:'accueil', component: AccueilComponent},
        {path:'faire-une-demande', component: DemandeComponent},
        {path:'a-propos', component: AboutComponent},
-       {path:'contact', component: ContactComponent}
+       {path:'contact', component: ContactComponent},
+       {path:'actualites', component: ActualitesComponent}
     ]
   },
   {path:'login', component: LoginComponent},
