@@ -22,6 +22,7 @@ export class LectureComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.getArticle(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // 🔥 Récupérer l’article par ID
