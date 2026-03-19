@@ -1,65 +1,86 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-actualites',
   templateUrl: './actualites.component.html',
   styleUrl: './actualites.component.css'
 })
-export class ActualitesComponent {
+export class ActualitesComponent implements OnInit, OnDestroy {
 
-  articles = [
-  {
-    titre: "Lancement d’une nouvelle plateforme digitale",
-    sousTitre: "Une solution innovante pour accompagner la transformation numérique en Afrique.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-    date: new Date() // à l'instant
-  },
-  {
-    titre: "Formation en développement web à Kinshasa",
-    sousTitre: "Plus de 200 jeunes formés aux technologies modernes comme Angular et Node.js.",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-    date: new Date(Date.now() - 1000 * 60 * 10) // 10 min
-  },
-  {
-    titre: "L’innovation au cœur des startups africaines",
-    sousTitre: "Les jeunes entrepreneurs transforment le paysage technologique du continent.",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    date: new Date(Date.now() - 1000 * 60 * 60) // 1h
-  },
-  {
-    titre: "Nouvelle application mobile de fitness",
-    sousTitre: "Une app intelligente pour suivre vos performances sportives en temps réel.",
-    image: "https://images.unsplash.com/photo-1558611848-73f7eb4001a1",
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24) // 1 jour
-  },
-  {
-    titre: "Transformation digitale des entreprises locales",
-    sousTitre: "Les PME adoptent de plus en plus les solutions numériques.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) // 1 semaine
-  },
-  {
-    titre: "Cybersécurité : un enjeu majeur en 2026",
-    sousTitre: "Les entreprises renforcent leurs systèmes pour protéger leurs données.",
-    image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87",
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30) // 1 mois
+  url = "https://api-equilibre.cloud/actualites";
+
+  articles: any[] = [];
+  articlesFiltres: any[] = [];
+  searchText: string = "";
+  loading: boolean = false;
+
+  refreshSub!: Subscription;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.getActualites();
+
+    // 🔥 Auto refresh chaque 30 secondes
+    this.refreshSub = interval(30000).subscribe(() => {
+      console.log("🔄 Actualisation automatique...");
+      this.getActualites(false); // sans loader pour UX propre
+    });
   }
-];
 
+  ngOnDestroy(): void {
+    // ⚠️ Important pour éviter fuite mémoire
+    if (this.refreshSub) {
+      this.refreshSub.unsubscribe();
+    }
+  }
 
-  getTimeAgo(date: string): string {
-  const now = new Date();
-  const past = new Date(date);
-  const diff = (now.getTime() - past.getTime()) / 1000;
+ // 🔥 Récupération API du plus récent au plus ancien
+getActualites(showLoading: boolean = true) {
+  if (showLoading) this.loading = true;
 
-  if (diff < 60) return "À l'instant";
-  if (diff < 3600) return Math.floor(diff / 60) + " min";
-  if (diff < 86400) return Math.floor(diff / 3600) + " h";
-  if (diff < 604800) return Math.floor(diff / 86400) + " j";
-  if (diff < 2592000) return Math.floor(diff / 604800) + " sem";
-  if (diff < 31536000) return Math.floor(diff / 2592000) + " mois";
+  this.http.get<any[]>(this.url).subscribe({
+    next: (data) => {
+      // Trier par date décroissante (plus récent d'abord)
+      this.articles = data.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
 
-  return Math.floor(diff / 31536000) + " an";
+      this.filtrer(); // garder le filtre actif
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error(err);
+      this.loading = false;
+    }
+  });
 }
+  // 🔍 Recherche
+  filtrer() {
+    const val = this.searchText.toLowerCase();
+
+    this.articlesFiltres = this.articles.filter(a =>
+      a.titre.toLowerCase().includes(val) ||
+      a.soustitre.toLowerCase().includes(val)
+    );
+  }
+
+  // ⏱ Temps relatif
+  getTimeAgo(date: string): string {
+    const now = new Date();
+    const past = new Date(date);
+    const diff = (now.getTime() - past.getTime()) / 1000;
+
+    if (diff < 60) return "À l'instant";
+    if (diff < 3600) return Math.floor(diff / 60) + " min";
+    if (diff < 86400) return Math.floor(diff / 3600) + " h";
+    if (diff < 604800) return Math.floor(diff / 86400) + " j";
+    if (diff < 2592000) return Math.floor(diff / 604800) + " sem";
+    if (diff < 31536000) return Math.floor(diff / 2592000) + " mois";
+
+    return Math.floor(diff / 31536000) + " an";
+  }
 
 }

@@ -13,6 +13,8 @@ import { TraitementComponent } from './admin/traitement/traitement.component';
 import { ContactComponent } from './client/contact/contact.component';
 import { InfoComponent } from './admin/info/info.component';
 import { ActualitesComponent } from './client/actualites/actualites.component';
+import { LectureComponent } from './client/lecture/lecture.component';
+import { PublierComponent } from './admin/publier/publier.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -23,7 +25,8 @@ const routes: Routes = [
        {path:'faire-une-demande', component: DemandeComponent},
        {path:'a-propos', component: AboutComponent},
        {path:'contact', component: ContactComponent},
-       {path:'actualites', component: ActualitesComponent}
+       {path:'actualites', component: ActualitesComponent},
+       {path:'lecture/:id', component: LectureComponent}
     ]
   },
   {path:'login', component: LoginComponent},
@@ -34,7 +37,8 @@ const routes: Routes = [
       {path:'demandes', component: DemandesComponent},
       {path:'messages', component: MessagesComponent},
       {path:'traitement', component: TraitementComponent},
-      {path:'info/:id', component: InfoComponent}
+      {path:'info/:id', component: InfoComponent},
+      {path:'publier', component: PublierComponent}
     ]
   }
 ];

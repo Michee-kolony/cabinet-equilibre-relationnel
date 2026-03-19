@@ -4,13 +4,13 @@
   <div class="flex justify-center mb-8">
     <div class="relative w-full max-w-md">
       <input
+        [(ngModel)]="searchText"
+        (input)="filtrer()"
         type="text"
         placeholder="Rechercher une actualité..."
         class="w-full pl-12 pr-4 py-3 rounded-full border-2 border-[#F04DE1] focus:outline-none focus:ring-2 focus:ring-[#F04DE1] shadow-sm"
       />
-      <i class="fa-solid fa-search absolute left-4 top-5 text-gray-400">
-        
-      </i>
+      <i class="fa-solid fa-search absolute left-4 top-5 text-gray-400"></i>
     </div>
   </div>
 
@@ -19,11 +19,21 @@
     Actualités récentes
   </h1>
 
-  <!-- LISTE DES ACTUALITÉS -->
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- LOADING -->
+  <div *ngIf="loading" class="text-center py-10 text-gray-500">
+    Chargement...
+  </div>
+
+  <!-- VIDE -->
+  <div *ngIf="!loading && articlesFiltres.length === 0" class="text-center py-10 text-gray-400">
+    Aucune actualité trouvée
+  </div>
+
+  <!-- LISTE -->
+  <div *ngIf="!loading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
     <!-- CARD -->
-    <div *ngFor="let article of articles"
+    <div *ngFor="let article of articlesFiltres"
          class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
 
       <!-- IMAGE -->
@@ -38,7 +48,7 @@
 
         <!-- DATE -->
         <span class="text-xs text-gray-400 mb-2">
-          {{ article.date }}
+          {{ getTimeAgo(article.date) }}
         </span>
 
         <!-- TITRE -->
@@ -48,11 +58,12 @@
 
         <!-- SOUS-TITRE -->
         <p class="text-sm text-gray-600 mb-4 line-clamp-3">
-          {{ article.sousTitre }}
+          {{ article.soustitre }}
         </p>
 
         <!-- BUTTON -->
         <button
+          [routerLink]="['/equilibre/lecture/', article._id]"
           class="mt-auto bg-gradient-to-r from-[#F04DE1] to-pink-500 text-white py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition">
           Lire plus
         </button>

@@ -21,7 +21,9 @@ import { TraitementComponent } from './admin/traitement/traitement.component';
 import { ContactComponent } from './client/contact/contact.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InfoComponent } from './admin/info/info.component';
-import { ActualitesComponent } from './client/actualites/actualites.component'; // <-- Import important !
+import { ActualitesComponent } from './client/actualites/actualites.component';
+import { LectureComponent } from './client/lecture/lecture.component';
+import { PublierComponent } from './admin/publier/publier.component'; // <-- Import important !
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ActualitesComponent } from './client/actualites/actualites.component'; 
     TraitementComponent,
     ContactComponent,
     InfoComponent,
-    ActualitesComponent
+    ActualitesComponent,
+    LectureComponent,
+    PublierComponent
   ],
   imports: [
     BrowserModule,

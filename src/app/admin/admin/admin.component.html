@@ -56,6 +56,16 @@
         <i class="fa-solid fa-align-right w-6"></i>
         <span *ngIf="isSidebarOpen" class="ml-3">Demandes traitées</span>
       </div>
+
+       <div
+        routerLink="/admin/publier"
+        routerLinkActive="bg-white text-black"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex items-center p-4 hover:bg-white/20 transition  cursor-pointer"
+      >
+       <i class="fa-solid fa-image w-6"></i>
+        <span *ngIf="isSidebarOpen" class="ml-3">Gestion actualités</span>
+      </div>
     </nav>
 
     <!-- Profile + Logout -->
@@ -127,7 +137,17 @@
         class="flex flex-col items-center text-xs cursor-pointer"
       >
         <i class="fa-solid fa-align-right text-lg"></i>
-        <span>Demandes traitées</span>
+        <span>traitées</span>
+      </div>
+
+      <div
+        routerLink="/admin/publier"
+        routerLinkActive="text-yellow-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex flex-col items-center text-xs cursor-pointer"
+      >
+        <i class="fa-solid fa-image text-lg"></i>
+        <span>Actualités</span>
       </div>
 
       <div
