@@ -1,0 +1,28 @@
+.input:focus {
+  border-color: #F04DE1;
+}
+
+/* animation popup */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.animate-slideIn {
+  animation: slideIn 0.4s ease;
+}
+
+.input {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #e5e7eb;
+  padding: 10px 6px;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+}

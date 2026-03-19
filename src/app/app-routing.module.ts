@@ -11,6 +11,7 @@ import { DemandesComponent } from './admin/demandes/demandes.component';
 import { MessagesComponent } from './admin/messages/messages.component';
 import { TraitementComponent } from './admin/traitement/traitement.component';
 import { ContactComponent } from './client/contact/contact.component';
+import { InfoComponent } from './admin/info/info.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -30,7 +31,8 @@ const routes: Routes = [
       {path:'dashboard', component: DashboardComponent},
       {path:'demandes', component: DemandesComponent},
       {path:'messages', component: MessagesComponent},
-      {path:'traitement', component: TraitementComponent}
+      {path:'traitement', component: TraitementComponent},
+      {path:'info/:id', component: InfoComponent}
     ]
   }
 ];

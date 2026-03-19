@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 interface Demande {
-  id: number;
+  _id: string;
   nom: string;
-  prenom: string;
-  sexe: 'Homme' | 'Femme';
-  etatCivil: 'Célibataire' | 'Marié(e)' | 'Divorcé(e)' | 'Veuf(ve)';
-  email: string;
+  sexe: string;
+  ville: string;
   telephone: string;
-  statut: 'Nouveau' | 'En cours' | 'Traité' | 'En attente';
-  dateDemande: Date;
+  civilite: string;
+  status: string;
+  createAt: string;
 }
 
 @Component({
@@ -18,207 +18,108 @@ interface Demande {
   styleUrls: ['./demandes.component.css']
 })
 export class DemandesComponent implements OnInit {
+
+  url = "https://api-equilibre.cloud/demande";
+
   demandes: Demande[] = [];
   demandesFiltrees: Demande[] = [];
+  loading: boolean = true;
+
+  // Civilités fixes
+  civilites: string[] = ['Célibataire', 'En couple', 'Marié(e)', 'Séparé(e)'];
+
   recherche: string = '';
   filtreSexe: string = '';
   filtreEtatCivil: string = '';
 
+  constructor(private http: HttpClient) {}
+
   ngOnInit(): void {
-    // Initialisation des 6 demandes
-    this.demandes = [
-      {
-        id: 1,
-        nom: 'Dupont',
-        prenom: 'Jean',
-        sexe: 'Homme',
-        etatCivil: 'Marié(e)',
-        email: 'jean.dupont@email.com',
-        telephone: '06 12 34 56 78',
-        statut: 'Nouveau',
-        dateDemande: new Date('2024-01-15')
+    this.getDemandes();
+  }
+
+  // Récupérer les demandes depuis le backend
+  getDemandes() {
+    this.http.get<Demande[]>(this.url).subscribe({
+      next: (data) => {
+        // Trier du plus récent au plus ancien
+        this.demandes = data.sort((a, b) =>
+          new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
+        );
+        this.demandesFiltrees = [...this.demandes];
+        this.loading = false;
       },
-      {
-        id: 2,
-        nom: 'Martin',
-        prenom: 'Sophie',
-        sexe: 'Femme',
-        etatCivil: 'Célibataire',
-        email: 'sophie.martin@email.com',
-        telephone: '07 23 45 67 89',
-        statut: 'En cours',
-        dateDemande: new Date('2024-01-14')
-      },
-      {
-        id: 3,
-        nom: 'Lefebvre',
-        prenom: 'Pierre',
-        sexe: 'Homme',
-        etatCivil: 'Divorcé(e)',
-        email: 'pierre.lefebvre@email.com',
-        telephone: '06 34 56 78 90',
-        statut: 'Traité',
-        dateDemande: new Date('2024-01-13')
-      },
-      {
-        id: 4,
-        nom: 'Bernard',
-        prenom: 'Marie',
-        sexe: 'Femme',
-        etatCivil: 'Marié(e)',
-        email: 'marie.bernard@email.com',
-        telephone: '07 45 67 89 01',
-        statut: 'En attente',
-        dateDemande: new Date('2024-01-12')
-      },
-      {
-        id: 5,
-        nom: 'Petit',
-        prenom: 'Thomas',
-        sexe: 'Homme',
-        etatCivil: 'Célibataire',
-        email: 'thomas.petit@email.com',
-        telephone: '06 56 78 90 12',
-        statut: 'Nouveau',
-        dateDemande: new Date('2024-01-11')
-      },
-      {
-        id: 6,
-        nom: 'Dubois',
-        prenom: 'Isabelle',
-        sexe: 'Femme',
-        etatCivil: 'Veuf(ve)',
-        email: 'isabelle.dubois@email.com',
-        telephone: '07 67 89 01 23',
-        statut: 'En cours',
-        dateDemande: new Date('2024-01-10')
+      error: (err) => console.error(err)
+    });
+  }
+
+  // Filtrage
+  filtrerDemandes(): void {
+    this.demandesFiltrees = this.demandes.filter(d => {
+      let ok = true;
+
+      if (this.recherche) {
+        ok = ok && d.nom.toLowerCase().includes(this.recherche.toLowerCase());
       }
-    ];
-    
-    this.demandesFiltrees = [...this.demandes];
+      if (this.filtreSexe) {
+        ok = ok && d.sexe === this.filtreSexe;
+      }
+      if (this.filtreEtatCivil) {
+        ok = ok && d.civilite === this.filtreEtatCivil;
+      }
+
+      return ok;
+    });
   }
 
-  // Obtenir l'initiale du nom
-  getInitials(nom: string, prenom: string): string {
-    return (prenom.charAt(0) + nom.charAt(0)).toUpperCase();
+  onRechercheChange(e: any) {
+    this.recherche = e.target.value;
+    this.filtrerDemandes();
   }
 
-  // Obtenir la couleur de fond en fonction du nom
-  getGradientColor(nom: string): string {
-    const colors = [
-      'from-blue-500 to-blue-600',
-      'from-purple-500 to-purple-600',
-      'from-green-500 to-green-600',
-      'from-red-500 to-red-600',
-      'from-yellow-500 to-yellow-600',
-      'from-indigo-500 to-indigo-600',
-      'from-pink-500 to-pink-600',
-      'from-teal-500 to-teal-600'
-    ];
-    
-    // Utiliser la somme des codes ASCII pour déterminer la couleur
-    const sum = nom.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return colors[sum % colors.length];
+  onFiltreSexeChange(e: any) {
+    this.filtreSexe = e.target.value;
+    this.filtrerDemandes();
   }
 
-  // Obtenir la couleur du statut
+  onFiltreEtatCivilChange(e: any) {
+    this.filtreEtatCivil = e.target.value;
+    this.filtrerDemandes();
+  }
+
+  // Couleurs des statuts
   getStatutColor(statut: string): string {
-    switch(statut) {
-      case 'Nouveau': return 'bg-blue-100 text-blue-800';
-      case 'En cours': return 'bg-yellow-100 text-yellow-800';
-      case 'Traité': return 'bg-green-100 text-green-800';
-      case 'En attente': return 'bg-orange-100 text-orange-800';
+    switch(statut.toLowerCase()) {
+      case 'en attente': return 'bg-orange-100 text-orange-800';
+      case 'en cours': return 'bg-yellow-100 text-yellow-800';
+      case 'traite': return 'bg-green-100 text-green-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   }
 
-  // Filtrer les demandes
-  filtrerDemandes(): void {
-    this.demandesFiltrees = this.demandes.filter(demande => {
-      let correspond = true;
-      
-      // Filtre de recherche
-      if (this.recherche) {
-        const searchTerm = this.recherche.toLowerCase();
-        correspond = correspond && (
-          demande.nom.toLowerCase().includes(searchTerm) ||
-          demande.prenom.toLowerCase().includes(searchTerm) ||
-          demande.email.toLowerCase().includes(searchTerm)
-        );
-      }
-      
-      // Filtre par sexe
-      if (this.filtreSexe) {
-        correspond = correspond && demande.sexe === this.filtreSexe;
-      }
-      
-      // Filtre par état civil
-      if (this.filtreEtatCivil) {
-        correspond = correspond && demande.etatCivil === this.filtreEtatCivil;
-      }
-      
-      return correspond;
-    });
+  // Time ago
+  getTimeAgo(date: string): string {
+    const now = new Date();
+    const past = new Date(date);
+    const diff = Math.floor((now.getTime() - past.getTime()) / 1000);
+
+    if (diff < 60) return "À l'instant";
+    if (diff < 3600) return `il y a ${Math.floor(diff / 60)} min`;
+    if (diff < 86400) return `il y a ${Math.floor(diff / 3600)} h`;
+    if (diff < 172800) return "il y a 1 jour";
+    if (diff < 604800) return `il y a ${Math.floor(diff / 86400)} jours`;
+    if (diff < 2592000) return `il y a ${Math.floor(diff / 604800)} semaines`;
+
+    return past.toLocaleDateString('fr-FR');
   }
 
-  // Mettre à jour la recherche
-  onRechercheChange(event: any): void {
-    this.recherche = event.target.value;
-    this.filtrerDemandes();
+  // Initiales du nom
+  getInitials(nom: string): string {
+    return nom.substring(0, 2).toUpperCase();
   }
 
-  // Mettre à jour le filtre sexe
-  onFiltreSexeChange(event: any): void {
-    this.filtreSexe = event.target.value;
-    this.filtrerDemandes();
+  // Action sur la demande
+  voirDemande(id: string) {
+    alert("Demande ID: " + id);
   }
-
-  // Mettre à jour le filtre état civil
-  onFiltreEtatCivilChange(event: any): void {
-    this.filtreEtatCivil = event.target.value;
-    this.filtrerDemandes();
-  }
-
-  // Réinitialiser les filtres
-  resetFiltres(): void {
-    this.recherche = '';
-    this.filtreSexe = '';
-    this.filtreEtatCivil = '';
-    this.demandesFiltrees = [...this.demandes];
-  }
-
-  // Formater la date
-  formatDate(date: Date): string {
-    return new Date(date).toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-  }
-
-  // Voir la demande
-  voirDemande(id: number): void {
-    console.log('Voir demande:', id);
-    // Ajoutez ici votre logique pour voir la demande
-    alert(`Affichage de la demande ${id}`);
-  }
-
-// Ajoutez ces méthodes dans votre composant
-
-// Obtenir le nombre de demandes par statut
-getDemandesParStatut(statut: string): number {
-  return this.demandes.filter(d => d.statut === statut).length;
-}
-
-// Obtenir la couleur du point de statut
-getStatutDotColor(statut: string): string {
-  switch(statut) {
-    case 'Nouveau': return 'bg-blue-500';
-    case 'En cours': return 'bg-yellow-500';
-    case 'Traité': return 'bg-green-500';
-    case 'En attente': return 'bg-orange-500';
-    default: return 'bg-gray-500';
-  }
-}
-
 }

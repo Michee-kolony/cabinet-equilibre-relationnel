@@ -14,7 +14,7 @@
       <div class="flex justify-between items-center">
         <div>
           <p class="text-gray-500 text-sm">Total Demandes</p>
-          <h2 class="text-3xl font-bold text-gray-800">120</h2>
+          <h2 class="text-3xl font-bold text-gray-800">{{ totalDemandes }}</h2>
         </div>
         <div class="bg-blue-100 text-blue-600 p-3 rounded-full text-xl">
           <i class="fas fa-file-alt"></i>
@@ -66,114 +66,43 @@
   <!-- Section du bas -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-   <!-- Activités récentes -->
-<div class="bg-white rounded-2xl shadow p-6">
+    <!-- Activités récentes -->
+    <div class="bg-white rounded-2xl shadow p-6">
+      <h3 class="text-xl font-semibold mb-4 text-gray-700">Activités Récentes</h3>
+      <ul class="space-y-4 text-gray-600">
 
-  <h3 class="text-xl font-semibold mb-4 text-gray-700">
-    Activités Récentes
-  </h3>
+        <!-- Boucle dynamique sur les demandes -->
+        <li *ngFor="let demande of demandes" class="flex justify-between items-center border-b pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#F04DE1] text-white flex items-center justify-center font-bold text-sm">
+              {{ getInitials(demande.nom) }}
+            </div>
+            <span>Demande reçue de <b>{{ demande.nom }}</b></span>
+          </div>
+          <span class="text-sm text-gray-400">{{ demande.createAt | date:'shortTime' }}</span>
+        </li>
 
-  <ul class="space-y-4 text-gray-600">
+      </ul>
+    </div>
 
-    <!-- Message -->
-    <li class="flex justify-between items-center border-b pb-3">
-
-      <div class="flex items-center gap-3">
-
-        <!-- Avatar initial -->
-        <div class="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">
-          JM
+    <!-- Graphique statistiques -->
+    <div class="bg-white rounded-2xl shadow p-6 mt-6">
+      <h3 class="text-xl font-semibold mb-4 text-gray-700">Répartition des Membres</h3>
+      <div class="flex justify-center">
+        <div class="w-64 h-64">
+          <canvas id="genderChart"></canvas>
         </div>
-
-        <span>
-          Message reçu de <b>Jean Mbuyi</b>
-        </span>
-
       </div>
-
-      <span class="text-sm text-gray-400">il y a 2 min</span>
-
-    </li>
-
-    <!-- Demande -->
-    <li class="flex justify-between items-center border-b pb-3">
-
-      <div class="flex items-center gap-3">
-
-        <div class="w-9 h-9 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm">
-          AK
-        </div>
-
-        <span>
-          Nouvelle demande de <b>Albert Kanza</b>
-        </span>
-
-      </div>
-
-      <span class="text-sm text-gray-400">il y a 10 min</span>
-
-    </li>
-
-    <!-- Article -->
-    <li class="flex justify-between items-center border-b pb-3">
-
-      <div class="flex items-center gap-3">
-
-        <div class="w-9 h-9 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm">
-          PN
-        </div>
-
-        <span>
-          Article publié par <b>Paul Nsimba</b>
-        </span>
-
-      </div>
-
-      <span class="text-sm text-gray-400">il y a 1h</span>
-
-    </li>
-
-    <!-- Paiement -->
-    <li class="flex justify-between items-center">
-
-      <div class="flex items-center gap-3">
-
-        <div class="w-9 h-9 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-sm">
-          MK
-        </div>
-
-        <span>
-          Paiement reçu de <b>Marie Kalala</b>
-        </span>
-
-      </div>
-
-      <span class="text-sm text-gray-400">il y a 3h</span>
-
-    </li>
-
-  </ul>
-
-</div>
-
-<!-- Graphique statistiques -->
-<div class="bg-white rounded-2xl shadow p-6 mt-6">
-
-  <h3 class="text-xl font-semibold mb-4 text-gray-700">
-    Répartition des Membres
-  </h3>
-
-  <div class="flex justify-center">
-
-    <!-- conteneur taille moyenne -->
-    <div class="w-64 h-64">
-      <canvas id="genderChart"></canvas>
     </div>
 
   </div>
 
 </div>
 
-  </div>
-
+<div *ngIf="loading" class="fixed bg-white/60 top-0 left-0 bottom-0 right-0 z-50 flex justify-center items-center">
+   <div>
+    <div class="spinner-border text-[#F04DE1]" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+   </div>
 </div>
