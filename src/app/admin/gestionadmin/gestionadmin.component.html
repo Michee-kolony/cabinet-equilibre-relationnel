@@ -1,4 +1,4 @@
-<div class="p-4 md:p-6 min-h-screen bg-gray-50">
+<div class="p-4 md:p-6 min-h-screen">
 
   <!-- HEADER -->
   <div class="mb-8">
@@ -59,7 +59,7 @@
       class="bg-white p-4 rounded-xl flex justify-between items-center shadow">
 
       <div>
-        <h3 class="font-semibold">{{ admin.nom }}</h3>
+        <h5 class="font-semibold">{{ admin.nom }}</h5>
         <p class="text-sm text-gray-500">{{ admin.email }}</p>
         <p class="text-xs text-gray-400">
           {{ getTimeAgo(admin.createAt) }}
