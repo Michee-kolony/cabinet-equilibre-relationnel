@@ -74,9 +74,6 @@
         <!-- Boucle dynamique sur les demandes -->
         <li *ngFor="let demande of demandes" class="flex justify-between items-center border-b pb-3">
           <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-[#F04DE1] text-white flex items-center justify-center font-bold text-sm">
-              {{ getInitials(demande.nom) }}
-            </div>
             <span>Demande reçue de <b>{{ demande.nom }}</b></span>
           </div>
           <span class="text-sm text-gray-400">{{ getTimeAgo(demande.createAt) }}</span>
