@@ -13,11 +13,15 @@ Chart.register(...registerables);
 export class DashboardComponent implements AfterViewInit, OnDestroy {
 
   url = "https://api-equilibre.cloud/demande";
+  urlmessage = "https://api-equilibre.cloud/messages";
   loading: boolean = true;
 
   demandes: any[] = [];
   totalDemandes: number = 0;
   totalTraite: number = 0; // 🔹 Nombre de demandes traitées
+
+  totalMessages: number = 0;
+  messages: any[] = [];
 
   genderChart: any;
 
@@ -27,10 +31,12 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.loadDemandes();
+    this.loadMessages();
 
     // Rafraîchissement automatique toutes les 10 secondes
     this.refreshSubscription = interval(10000).subscribe(() => {
       this.loadDemandes(false); // false pour ne pas afficher loader
+      this.loadMessages(false);
     });
   }
 
@@ -101,6 +107,28 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       if (showLoading) this.loading = false;
     });
   }
+
+  loadMessages(showLoading: boolean = true) {
+
+  this.http.get<any[]>(this.urlmessage).subscribe({
+    next: (data) => {
+
+      // 🔥 Trier du plus récent au plus ancien
+      this.messages = data.sort((a, b) =>
+        new Date(b.createAt || b.createdAt).getTime() -
+        new Date(a.createAt || a.createdAt).getTime()
+      );
+
+      // 🔥 TOTAL
+      this.totalMessages = this.messages.length;
+
+    },
+    error: (err) => {
+      console.error("Erreur messages :", err);
+    }
+  });
+
+}
 
   // Fonction pour récupérer les initiales du nom
   getInitials(name: string) {

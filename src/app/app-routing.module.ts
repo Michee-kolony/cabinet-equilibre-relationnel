@@ -17,6 +17,7 @@ import { LectureComponent } from './client/lecture/lecture.component';
 import { PublierComponent } from './admin/publier/publier.component';
 import { GestionadminComponent } from './admin/gestionadmin/gestionadmin.component';
 import { authGuard } from './guards/auth.guard';
+import { LireComponent } from './admin/lire/lire.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -41,7 +42,8 @@ const routes: Routes = [
       {path:'traitement', component: TraitementComponent},
       {path:'info/:id', component: InfoComponent},
       {path:'publier', component: PublierComponent},
-      {path:'gestion', component: GestionadminComponent}
+      {path:'gestion', component: GestionadminComponent},
+      {path:'lire-message/:id', component: LireComponent}
     ]
   }
 ];

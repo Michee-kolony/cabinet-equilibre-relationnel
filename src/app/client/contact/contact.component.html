@@ -10,7 +10,7 @@
        style="background: repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 2px, transparent 2px, transparent 20px);">
   </div>
 
-  <!-- EFFET DE BRILLANCE -->
+  <!-- EFFET BRILLANCE -->
   <div class="absolute inset-0 opacity-30 pointer-events-none"
        style="background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);">
   </div>
@@ -22,57 +22,89 @@
 
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start relative z-10">
 
-    <!-- PARTIE GAUCHE -->
+    <!-- GAUCHE -->
     <div class="space-y-6 text-white lg:sticky lg:top-8">
-      <div class="space-y-4">
-        <h2 class="text-3xl font-bold text-white drop-shadow-lg">
-          Contactez-nous
-        </h2>
+      <h2 class="text-3xl font-bold drop-shadow-lg">
+        Contactez-nous
+      </h2>
 
-        <p class="text-white/90 leading-relaxed">
-          Avez-vous une question ou une préoccupation ? Veuillez nous contacter.
-          Notre équipe s'en chargera pour vous répondre rapidement.
-        </p>
-      </div>
+      <p class="text-white/90 leading-relaxed">
+        Avez-vous une question ou une préoccupation ? Contactez-nous.
+        Nous vous répondrons rapidement.
+      </p>
     </div>
 
-    <!-- FORMULAIRE -->
+    <!-- FORM -->
     <div class="bg-white shadow-2xl rounded-3xl p-8 backdrop-blur-sm bg-white/95">
 
       <h4 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-3 text-center">
         Formulaire de contact
       </h4>
 
-      <form class="space-y-6">
+      <!-- SUCCESS -->
+      <div *ngIf="successMessage"
+           class="bg-green-100 text-green-700 p-3 rounded-xl text-sm mb-4 text-center animate-pulse">
+        {{ successMessage }}
+      </div>
+
+      <!-- ERROR -->
+      <div *ngIf="errorMessage"
+           class="bg-red-100 text-red-700 p-3 rounded-xl text-sm mb-4 text-center animate-pulse">
+        {{ errorMessage }}
+      </div>
+
+      <form #contactForm="ngForm" (ngSubmit)="envoyerMessage(contactForm)" class="space-y-6">
 
         <!-- NOM -->
-        <div>
-          <input type="text" placeholder="Nom"
-            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
-        </div>
+        <input type="text"
+          name="nom"
+          [(ngModel)]="formData.nom"
+          required
+          #nom="ngModel"
+          placeholder="Nom"
+          class="w-full border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
 
         <!-- EMAIL -->
-        <div>
-          <input type="email" placeholder="Email"
-            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
-        </div>
+        <input type="email"
+          name="email"
+          [(ngModel)]="formData.email"
+          required
+          email
+          #email="ngModel"
+          placeholder="Email"
+          class="w-full border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
 
         <!-- TELEPHONE -->
-        <div>
-          <input type="text" placeholder="Téléphone"
-            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
-        </div>
+        <input type="text"
+          name="telephone"
+          [(ngModel)]="formData.telephone"
+          required
+          #tel="ngModel"
+          placeholder="Téléphone"
+          class="w-full border-b-2 border-gray-200 px-2 py-2.5 text-sm focus:border-[#F04DE1] outline-none bg-transparent"/>
 
         <!-- MESSAGE -->
-        <div>
-          <textarea rows="4" placeholder="Votre message"
-            class="w-full border-0 border-b-2 border-gray-200 px-2 py-2 text-sm focus:border-[#F04DE1] outline-none bg-transparent resize-none"></textarea>
-        </div>
+        <textarea rows="4"
+          name="message"
+          [(ngModel)]="formData.message"
+          required
+          #msg="ngModel"
+          placeholder="Votre message"
+          class="w-full border-b-2 border-gray-200 px-2 py-2 text-sm focus:border-[#F04DE1] outline-none bg-transparent resize-none"></textarea>
 
-        <!-- BOUTON -->
-        <button
-          class="w-full bg-gradient-to-r from-[#F04DE1] to-red-500 hover:from-[#d43db9] hover:to-red-600 text-white py-3 rounded-xl font-semibold text-sm transition-all transform hover:scale-[1.02] shadow-lg">
-          Envoyer
+        <!-- BUTTON -->
+        <button type="submit"
+          [disabled]="contactForm.invalid || loading"
+          class="w-full bg-gradient-to-r from-[#F04DE1] to-red-500 hover:from-[#d43db9] hover:to-red-600 text-white py-3 rounded-xl font-semibold text-sm transition-all transform hover:scale-[1.02] shadow-lg disabled:opacity-50 flex items-center justify-center gap-2">
+
+          <!-- SPINNER -->
+          <svg *ngIf="loading" class="animate-spin h-5 w-5 text-white"
+               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="4"></circle>
+          </svg>
+
+          {{ loading ? 'Envoi en cours...' : 'Envoyer' }}
+
         </button>
 
       </form>

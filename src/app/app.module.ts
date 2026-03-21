@@ -24,7 +24,8 @@ import { InfoComponent } from './admin/info/info.component';
 import { ActualitesComponent } from './client/actualites/actualites.component';
 import { LectureComponent } from './client/lecture/lecture.component';
 import { PublierComponent } from './admin/publier/publier.component';
-import { GestionadminComponent } from './admin/gestionadmin/gestionadmin.component'; // <-- Import important !
+import { GestionadminComponent } from './admin/gestionadmin/gestionadmin.component';
+import { LireComponent } from './admin/lire/lire.component'; // <-- Import important !
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { GestionadminComponent } from './admin/gestionadmin/gestionadmin.compone
     ActualitesComponent,
     LectureComponent,
     PublierComponent,
-    GestionadminComponent
+    GestionadminComponent,
+    LireComponent
   ],
   imports: [
     BrowserModule,
