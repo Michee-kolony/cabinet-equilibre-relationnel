@@ -15,6 +15,8 @@ import { InfoComponent } from './admin/info/info.component';
 import { ActualitesComponent } from './client/actualites/actualites.component';
 import { LectureComponent } from './client/lecture/lecture.component';
 import { PublierComponent } from './admin/publier/publier.component';
+import { GestionadminComponent } from './admin/gestionadmin/gestionadmin.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -30,7 +32,7 @@ const routes: Routes = [
     ]
   },
   {path:'login', component: LoginComponent},
-  {path:'admin', component: AdminComponent, 
+  {path:'admin', component: AdminComponent, canActivateChild:[authGuard],
     children:[
       {path:'', redirectTo:'dashboard', pathMatch:'full'},
       {path:'dashboard', component: DashboardComponent},
@@ -38,7 +40,8 @@ const routes: Routes = [
       {path:'messages', component: MessagesComponent},
       {path:'traitement', component: TraitementComponent},
       {path:'info/:id', component: InfoComponent},
-      {path:'publier', component: PublierComponent}
+      {path:'publier', component: PublierComponent},
+      {path:'gestion', component: GestionadminComponent}
     ]
   }
 ];

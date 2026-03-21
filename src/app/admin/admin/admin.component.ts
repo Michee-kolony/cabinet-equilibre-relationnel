@@ -1,22 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
+
   isSidebarOpen = true;
 
-  // Simuler profil admin
-  adminName = "Michée Kolony";
-  adminInitials = this.getInitials(this.adminName);
+  // 🔹 Nom et email récupérés depuis le localStorage
+  adminName: string = '';
+  adminEmail: string = '';
+  adminInitials: string = '';
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    // Récupérer l'utilisateur connecté depuis localStorage
+    const adminData = localStorage.getItem('admin');
+    if (adminData) {
+      const admin = JSON.parse(adminData);
+      this.adminName = admin.nom || '';
+      this.adminEmail = admin.email || '';
+      this.adminInitials = this.getInitials(this.adminName);
+    }
+  }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  getInitials(name: string) {
+  getInitials(name: string): string {
     return name
       .split(' ')
       .map(n => n[0])
@@ -24,8 +40,13 @@ export class AdminComponent {
       .toUpperCase();
   }
 
+  // 🔥 LOGOUT PRO
   logout() {
-    // Ici tu peux gérer la déconnexion (ex: clear token + router navigate)
-    console.log('Déconnexion');
+    // Supprimer les données
+    localStorage.removeItem('token');
+    localStorage.removeItem('admin');
+
+    // Redirection vers login
+    this.router.navigate(['/login']);
   }
 }

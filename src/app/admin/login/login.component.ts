@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -7,19 +7,31 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   url = "https://api-equilibre.cloud/admin/login";
+
   showPassword = false;
-  loading = false;           // Pour le spinner
-  popupMessage: string = ''; // Message à afficher dans le popup
-  popupType: 'success' | 'error' = 'success'; // Type de popup (success ou error)
-  showPopup = false;         // Affichage du popup
+  loading = false;
+
+  popupMessage: string = '';
+  popupType: 'success' | 'error' = 'success';
+  showPopup = false;
 
   username: string = '';
   password: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  // 🔥 AUTO REDIRECTION SI CONNECTÉ
+  ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    const admin = localStorage.getItem('admin');
+
+    if (token && admin && token !== 'null' && token !== 'undefined') {
+      this.router.navigate(['/admin/dashboard']);
+    }
+  }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
@@ -38,13 +50,11 @@ export class LoginComponent {
         next: (res) => {
           this.loading = false;
 
-          // Stocker dans localStorage
           localStorage.setItem('admin', JSON.stringify(res.admin));
           localStorage.setItem('token', res.token);
 
           this.showPopupMessage(res.message, 'success');
 
-          // Redirection après 1.5s pour laisser le temps de voir le popup
           setTimeout(() => {
             this.router.navigate(['/admin/dashboard']);
           }, 1500);
@@ -64,6 +74,7 @@ export class LoginComponent {
 
     setTimeout(() => {
       this.showPopup = false;
-    }, 3000); // Popup disparaît après 3s
+    }, 3000);
   }
+
 }

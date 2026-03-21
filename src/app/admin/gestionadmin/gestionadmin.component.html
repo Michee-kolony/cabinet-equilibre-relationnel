@@ -1,0 +1,91 @@
+<div class="p-4 md:p-6 min-h-screen bg-gray-50">
+
+  <!-- HEADER -->
+  <div class="mb-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+      Gestion Administrateur
+    </h1>
+    <p class="text-gray-500 mt-2">
+      Ajoutez, recherchez et supprimez les administrateurs.
+    </p>
+  </div>
+
+  <!-- POPUP -->
+  <div *ngIf="showAlert"
+    class="fixed top-5 right-5 px-5 py-3 rounded-lg shadow-lg text-white z-50"
+    [ngClass]="{
+      'bg-green-500': alertType === 'success',
+      'bg-red-500': alertType === 'error'
+    }">
+    {{ alertMessage }}
+  </div>
+
+  <!-- FORM -->
+  <div class="bg-white p-5 rounded-2xl shadow border mb-6">
+
+    <form (ngSubmit)="createAdmin()" class="grid md:grid-cols-2 gap-4">
+
+      <input [(ngModel)]="newAdmin.nom" name="nom" placeholder="Nom" class="border px-3 py-2 rounded-lg"/>
+      <input [(ngModel)]="newAdmin.email" name="email" placeholder="Email" class="border px-3 py-2 rounded-lg"/>
+      <input [(ngModel)]="newAdmin.password" name="password" type="password" placeholder="Mot de passe"
+        class="border px-3 py-2 rounded-lg md:col-span-2"/>
+
+      <button type="submit"
+        [disabled]="!isFormValid() || creating"
+        class="md:col-span-2 h-[45px] flex items-center justify-center gap-2 bg-gradient-to-r from-[#F04DE1] to-red-500 text-white rounded-lg disabled:opacity-50">
+
+        <svg *ngIf="creating" class="animate-spin h-5 w-5" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="4" fill="none"/>
+        </svg>
+
+        {{ creating ? 'Création...' : 'Créer' }}
+
+      </button>
+
+    </form>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="bg-white p-4 rounded-xl shadow mb-6">
+    <input [(ngModel)]="searchText" (input)="onSearch()"
+      placeholder="Rechercher un admin..."
+      class="w-full border px-3 py-2 rounded-lg"/>
+  </div>
+
+
+  <div *ngIf="!loading" class="space-y-4">
+
+    <div *ngFor="let admin of filteredAdmins"
+      class="bg-white p-4 rounded-xl flex justify-between items-center shadow">
+
+      <div>
+        <h3 class="font-semibold">{{ admin.nom }}</h3>
+        <p class="text-sm text-gray-500">{{ admin.email }}</p>
+        <p class="text-xs text-gray-400">
+          {{ getTimeAgo(admin.createAt) }}
+        </p>
+      </div>
+
+      <button (click)="deleteAdmin(admin._id)"
+        class="bg-red-100 text-red-600 px-3 py-2 rounded hover:bg-red-200">
+        Supprimer
+      </button>
+
+    </div>
+
+    <div *ngIf="filteredAdmins.length === 0" class="text-center text-gray-400">
+      Aucun administrateur
+    </div>
+
+  </div>
+
+</div>
+
+
+<div *ngIf="loading" class="fixed bg-white/60 top-0 left-0 bottom-0 right-0 z-50 flex justify-center items-center">
+   <div>
+    <div class="spinner-border text-[#F04DE1]" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+   </div>
+</div>
