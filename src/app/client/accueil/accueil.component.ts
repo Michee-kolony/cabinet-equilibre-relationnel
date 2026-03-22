@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger); // Important pour activer ScrollTrigger
   styleUrl: './accueil.component.css'
 })
 export class AccueilComponent implements AfterViewInit, OnInit{
-
+showPopup = false;
 
   ngAfterViewInit(): void {
      // Animate stat1
@@ -25,6 +25,9 @@ export class AccueilComponent implements AfterViewInit, OnInit{
   }
 
   ngOnInit(): void {
+     setTimeout(() => {
+    this.showPopup = true;
+  }, 5000); // popup après 3 secondes
      // Scroll automatique en haut de la page
    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -90,6 +93,10 @@ export class AccueilComponent implements AfterViewInit, OnInit{
       }
     );
   }
+
+  closePopup() {
+  this.showPopup = false;
+}
 
 
 

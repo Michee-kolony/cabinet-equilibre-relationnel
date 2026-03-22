@@ -25,7 +25,11 @@ import { ActualitesComponent } from './client/actualites/actualites.component';
 import { LectureComponent } from './client/lecture/lecture.component';
 import { PublierComponent } from './admin/publier/publier.component';
 import { GestionadminComponent } from './admin/gestionadmin/gestionadmin.component';
-import { LireComponent } from './admin/lire/lire.component'; // <-- Import important !
+import { LireComponent } from './admin/lire/lire.component';
+import { ConditionsComponent } from './client/conditions/conditions.component';
+import { ConfidentialiteComponent } from './client/confidentialite/confidentialite.component';
+import { SecuriteComponent } from './client/securite/securite.component';
+import { CentreComponent } from './client/centre/centre.component'; // <-- Import important !
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { LireComponent } from './admin/lire/lire.component'; // <-- Import impor
     LectureComponent,
     PublierComponent,
     GestionadminComponent,
-    LireComponent
+    LireComponent,
+    ConditionsComponent,
+    ConfidentialiteComponent,
+    SecuriteComponent,
+    CentreComponent
   ],
   imports: [
     BrowserModule,

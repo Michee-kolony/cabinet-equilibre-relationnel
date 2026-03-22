@@ -25,10 +25,10 @@
       <div>
         <h4 class="text-lg font-semibold mb-4 border-b-2 border-red-200 pb-2 inline-block text-black">Découvrir</h4>
         <ul class="space-y-2 text-gray-500">
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Comment ça marche</a></li>
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Témoignages</a></li>
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Blog</a></li>
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Événements</a></li>
+          <li><a routerLink="/equilibre/accueil" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i>Accueil</a></li>
+          <li><a routerLink="/equilibre/a-propos" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> A propos</a></li>
+          <li><a routerLink="/equilibre/actualites" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Actualités</a></li>
+          <li><a routerLink="/equilibre/faire-une-demande" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Faire une demande</a></li>
         </ul>
       </div>
       
@@ -36,10 +36,10 @@
       <div>
         <h4 class="text-lg font-semibold mb-4 border-b-2 border-red-200 pb-2  text-black">Aide</h4>
         <ul class="space-y-2 text-gray-500">
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Centre d'aide</a></li>
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Sécurité</a></li>
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Confidentialité</a></li>
-          <li><a href="#" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Conditions d'utilisation</a></li>
+          <li><a routerLink="/equilibre/centre-aide" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Centre d'aide</a></li>
+          <li><a routerLink="/equilibre/securite" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Sécurité</a></li>
+          <li><a routerLink="/equilibre/confidentialite" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Confidentialité</a></li>
+          <li><a routerLink="/equilibre/conditions" class="text-gray-600 hover:translate-x-1  transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-600"></i> Conditions d'utilisation</a></li>
         </ul>
       </div>
       
@@ -62,13 +62,11 @@
         <div>
           <p class="text-gray-600 text-sm mb-3 font-medium">Suivez-nous</p>
           <div class="flex space-x-4">
-            <a href="#" class="text-decoration-none bg-white border  w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 group" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/18YYRWjNhh/?mibextid=wwXIfr
+" target="_blank" class="text-decoration-none bg-white border  w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 group" aria-label="Facebook">
               <i class="fab fa-facebook-f text-gray-500 group-hover:text-white text-xl"></i>
             </a>
-            <a href="#" class="text-decoration-none bg-white border  w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 group" aria-label="Instagram">
-              <i class="fab fa-instagram text-gray-500 group-hover:text-white text-xl"></i>
-            </a>
-            <a href="#" class="text-decoration-none bg-white border  w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 group" aria-label="Twitter">
+            <a href="https://x.com/crelationnel?s=21" target="_blank" class="text-decoration-none bg-white border  w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 group" aria-label="Twitter">
               <i class="fab fa-twitter text-gray-500 group-hover:text-white text-xl"></i>
             </a>
             <a href="#" class="text-decoration-none bg-white border  w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 group" aria-label="TikTok">
@@ -87,8 +85,6 @@
       <p>© 2026 Cabinet Equilibre Relationnel Tous droits réservés | Developpé par <a href="https://www.ayemtech.com" target="_blank">Ayemtech</a></p>
       <div class="flex space-x-4 mt-2 md:mt-0">
         <a href="#" class="hover:text-red-400 transition">Mentions légales</a>
-        <a href="#" class="hover:text-red-400 transition">Politique de cookies</a>
-        <a href="#" class="hover:text-red-400 transition">Préférences</a>
       </div>
     </div>
   </div>

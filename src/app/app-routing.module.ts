@@ -18,6 +18,10 @@ import { PublierComponent } from './admin/publier/publier.component';
 import { GestionadminComponent } from './admin/gestionadmin/gestionadmin.component';
 import { authGuard } from './guards/auth.guard';
 import { LireComponent } from './admin/lire/lire.component';
+import { ConditionsComponent } from './client/conditions/conditions.component';
+import { ConfidentialiteComponent } from './client/confidentialite/confidentialite.component';
+import { SecuriteComponent } from './client/securite/securite.component';
+import { CentreComponent } from './client/centre/centre.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'equilibre', pathMatch:'full'},
@@ -29,7 +33,11 @@ const routes: Routes = [
        {path:'a-propos', component: AboutComponent},
        {path:'contact', component: ContactComponent},
        {path:'actualites', component: ActualitesComponent},
-       {path:'lecture/:id', component: LectureComponent}
+       {path:'lecture/:id', component: LectureComponent},
+       {path:'conditions', component: ConditionsComponent},
+       {path:'confidentialite', component: ConfidentialiteComponent},
+       {path:'securite', component: SecuriteComponent},
+       {path:'centre-aide', component: CentreComponent}
     ]
   },
   {path:'login', component: LoginComponent},
