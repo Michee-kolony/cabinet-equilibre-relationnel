@@ -26,29 +26,42 @@
           {{ formatDate(act.date) }}
         </p>
 
-        <button
-          (click)="deleteActualite(act._id)" 
-          class="bg-red-500 text-white px-4 py-3 rounded-lg text-sm hover:opacity-90">
-          Supprimer
-        </button>
+        <div class="flex gap-2">
+
+          <!-- MODIFIER -->
+          <button
+            (click)="editActualite(act)" 
+            class="bg-green-500 text-white px-3 py-2 rounded-lg text-sm hover:opacity-90">
+            Modifier
+          </button>
+
+          <!-- SUPPRIMER -->
+          <button
+            (click)="deleteActualite(act._id)" 
+            class="bg-red-500 text-white px-3 py-2 rounded-lg text-sm hover:opacity-90">
+            Supprimer
+          </button>
+
+        </div>
       </div>
     </div>
 
   </div>
-
 
 </div>
 
 
 <!-- MODALE -->
 <div *ngIf="showModal" 
-     class="fixed inset-0 bg-black/40 bg-opacity-40 flex items-center justify-center z-50">
+     class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
 
   <div class="bg-white rounded-2xl p-6 w-full max-w-lg shadow-lg">
 
-    <h2 class="text-xl font-bold mb-4 text-gray-800">Publier une actualité</h2>
+    <h2 class="text-xl font-bold mb-4 text-gray-800">
+      {{ isEdit ? 'Modifier une actualité' : 'Publier une actualité' }}
+    </h2>
 
-    <form (ngSubmit)="publieractu()">
+    <form (ngSubmit)="isEdit ? updateActualite() : publieractu()">
 
       <input type="text" [(ngModel)]="titre" name="titre"
              placeholder="Titre"
@@ -86,7 +99,7 @@
 
         <button type="submit"
                 class="px-4 py-2 bg-[#F04DE1] text-white rounded-lg hover:opacity-90">
-          Publier
+          {{ isEdit ? 'Modifier' : 'Publier' }}
         </button>
       </div>
     </form>
@@ -95,11 +108,7 @@
 </div>
 
 
-
+<!-- LOADING -->
 <div *ngIf="loading" class="fixed bg-white/60 top-0 left-0 bottom-0 right-0 z-50 flex justify-center items-center">
-   <div>
-    <div class="spinner-border text-[#F04DE1]" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-   </div>
+  <div class="spinner-border text-[#F04DE1]" role="status"></div>
 </div>
