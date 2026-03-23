@@ -14,10 +14,10 @@ showPopup = false;
 
   ngAfterViewInit(): void {
      // Animate stat1
-    this.animateNumber('#stat1', 40, 2); // 9000 en 2 secondes
-    this.animateNumber('#stat2', 500, 2);
-    this.animateNumber('#stat3', 8, 2);
-    this.animateNumber('#stat4', 24, 2);
+    this.animateNumber('#stat1', 0, 2); // 9000 en 2 secondes
+    this.animateNumber('#stat2', 0, 2);
+    this.animateNumber('#stat3', 0, 2);
+    this.animateNumber('#stat4', 0, 2);
     // Attend la fin du rendu du DOM pour les textes
   setTimeout(() => {
     this.animateTexts();
