@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-demande',
@@ -30,9 +31,11 @@ export class DemandeComponent implements OnInit {
     attente: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private title: Title) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Faire une demande');
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
 
   url = "https://api-equilibre.cloud/messages";
 
@@ -22,7 +23,11 @@ export class ContactComponent {
   successMessage = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private title: Title) {}
+
+  ngOnInit(): void {
+    this.title.setTitle('Nous-contacter');
+  }
 
   envoyerMessage(form: NgForm) {
 

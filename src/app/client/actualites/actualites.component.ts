@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { interval, Subscription } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-actualites',
@@ -18,9 +19,11 @@ export class ActualitesComponent implements OnInit, OnDestroy {
 
   refreshSub!: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private title: Title) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+     
+    this.title.setTitle('Actualités');
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 

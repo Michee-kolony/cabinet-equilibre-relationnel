@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Title } from '@angular/platform-browser';
 
 gsap.registerPlugin(ScrollTrigger); // Important pour activer ScrollTrigger
 
@@ -11,6 +12,9 @@ gsap.registerPlugin(ScrollTrigger); // Important pour activer ScrollTrigger
 })
 export class AccueilComponent implements AfterViewInit, OnInit{
 showPopup = false;
+
+
+constructor(private title: Title){}
 
   ngAfterViewInit(): void {
      // Animate stat1
@@ -25,6 +29,8 @@ showPopup = false;
   }
 
   ngOnInit(): void {
+
+    this.title.setTitle('Accueil');
      setTimeout(() => {
     this.showPopup = true;
   }, 5000); // popup après 3 secondes
