@@ -18,9 +18,9 @@ constructor(private title: Title){}
 
   ngAfterViewInit(): void {
      // Animate stat1
-    this.animateNumber('#stat1', 0, 2); // 9000 en 2 secondes
-    this.animateNumber('#stat2', 0, 2);
-    this.animateNumber('#stat3', 0, 2);
+    this.animateNumber('#stat1', 15, 2); // 9000 en 2 secondes
+    this.animateNumber('#stat2', 30, 2);
+    this.animateNumber('#stat3', 40, 2);
     this.animateNumber('#stat4', 0, 2);
     // Attend la fin du rendu du DOM pour les textes
   setTimeout(() => {
